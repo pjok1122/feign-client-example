@@ -3,6 +3,7 @@ package com.youngjae.feign.client.demo.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,11 @@ public class ExternalController {
     public User returnObject(@RequestParam String name,
                              @RequestParam Integer age) {
         return new User(name, age);
+    }
+
+    @GetMapping("/{user-name}/yes-path-variable")
+    public String yesPathVariable(@PathVariable("user-name") String userName) {
+        return userName;
     }
 
     @PostMapping("/yes-body")

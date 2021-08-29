@@ -23,16 +23,24 @@ public class LocalFeignService {
         return feignLocalClient.yesParams(name, age);
     }
 
-    public String callReturnObjectAPI(String name, Integer age) {
+    public String callYesPathVariableAPI(String userName) {
+        return feignLocalClient.yesPathVariable(userName);
+    }
+
+    public User callReturnObjectAPI(String name, Integer age) {
         return feignLocalClient.returnObject(name, age);
+    }
+
+    public String callReturnStringAPI(String name, Integer age) {
+        return feignLocalClient.returnString(name, age);
     }
 
     public String callYesBodyAPI(User user) {
         return feignLocalClient.yesBody(user);
     }
 
-    public String callYesHeaderAPI(String testHeader) {
-        return feignLocalClient.yesHeader(testHeader);
+    public String callYesDynamicHeaderAPI(String testHeader) {
+        return feignLocalClient.yesDynamicHeader(testHeader);
     }
 
 }
