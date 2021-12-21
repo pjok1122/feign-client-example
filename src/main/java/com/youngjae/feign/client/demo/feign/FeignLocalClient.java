@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.youngjae.feign.client.demo.config.FeignLocalClientConfiguration;
 import com.youngjae.feign.client.demo.domain.User;
 
-import feign.Headers;
-import feign.RequestLine;
-
-@FeignClient(name ="localhost", url = "http://localhost:8080")
+@FeignClient(name ="localhost", url = "http://localhost:8080", configuration = FeignLocalClientConfiguration.class)
 public interface FeignLocalClient {
 
     @GetMapping("/no-params")
@@ -37,4 +35,10 @@ public interface FeignLocalClient {
 
     @GetMapping(value = "/yes-header", headers = {"content-type=application/json; charset=utf-8", "accept=application/json"})
     String yesDynamicHeader(@RequestHeader("test-header") String testHeader);
+
+    @GetMapping(value = "/test-interceptor")
+    String testInterceptor();
+
+    @GetMapping("/return-500")
+    String return500();
 }

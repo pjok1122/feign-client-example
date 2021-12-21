@@ -43,4 +43,8 @@ public class LocalFeignService {
         return feignLocalClient.yesDynamicHeader(testHeader);
     }
 
+    public String testInterceptor() {
+        return feignLocalClient.testInterceptor();
+    }
+
 }

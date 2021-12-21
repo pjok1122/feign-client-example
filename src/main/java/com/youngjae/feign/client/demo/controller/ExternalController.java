@@ -2,16 +2,23 @@ package com.youngjae.feign.client.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.youngjae.feign.client.demo.domain.User;
+import com.youngjae.feign.client.demo.service.LocalFeignService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 public class ExternalController {
 
     @GetMapping("/no-params")
@@ -49,5 +56,15 @@ public class ExternalController {
         return "contentType : " + contentType + ", headerTest : " + headerTest;
     }
 
+    @GetMapping("/test-interceptor")
+    public String testInterceptor(@RequestHeader("interceptor") String header) {
+        return header;
+    }
+
+    @GetMapping("/return-500")
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String return500() {
+        return null;
+    }
 
 }

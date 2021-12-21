@@ -18,7 +18,7 @@ import com.youngjae.feign.client.demo.domain.User;
  * @author youngjae park (youngjae.p@linecorp.com)
  * @since 2021.08.29
  */
-@SpringBootTest(webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @EnableFeignClients
 @ComponentScan(basePackages = "com/youngjae/feign/client/demo/config")
 class LocalFeignServiceTest {
@@ -107,6 +107,15 @@ class LocalFeignServiceTest {
 
         //then
         Assertions.assertThat(result).isEqualTo("contentType : application/json; charset=utf-8, headerTest : test-Header");
+    }
+
+    @Test
+    public void testInterceptor() {
+        //when
+        String header = feignService.testInterceptor();
+
+        //then
+        Assertions.assertThat(header).isEqualTo("interceptor1");
     }
 
 }
